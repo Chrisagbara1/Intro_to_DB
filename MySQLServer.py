@@ -3,6 +3,8 @@
 import os
 from dotenv import load_dotenv
 import mysql.connector
+from mysql.connector import Error as MySQLError  
+
 from mysql.connector import Error
 
 # Load environment variables from .env file
@@ -27,8 +29,8 @@ def create_database():
             cursor.execute("CREATE DATABASE IF NOT EXISTS alx_book_store")
             print("Database 'alx_book_store' created successfully!")
 
-    except Error as e:
-        print("Error while connecting to MySQL:", e)
+    except mysql.connector.Error as err:
+        print("Error while connecting to MySQL:", err)
 
     finally:
         if 'cursor' in locals():
